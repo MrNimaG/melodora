@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Melodora — AI-powered music creation for everyone. Every culture. Every language. Every level." />
+  <title>Melodora — Music Creation for Everyone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --purple: #7C3AED;
+      --purple-light: #9F67FF;
+      --purple-dark: #5B21B6;
+      --bg: #0A0A0F;
+      --bg-card: #13131A;
+      --text: #F5F3FF;
+      --text-muted: #9CA3AF;
+      --border: #1F1F2E;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--purple-light);
+    }
+
+    .nav-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 40px 80px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-light);
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 32px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--purple-light);
+    }
+
+    .subtitle {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    /* EMAIL FORM */
+    .form-wrapper {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .form-wrapper input {
+      flex: 1;
+      min-width: 240px;
+      padding: 14px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-wrapper input:focus {
+      border-color: var(--purple);
+    }
+
+    .form-wrapper input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .btn {
+      padding: 14px 28px;
+      background: var(--purple);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: var(--purple-light);
+      transform: translateY(-1px);
+    }
+
+    .form-note {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* DIVIDER */
+    .divider {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* WHAT IS MELODORA */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple-light);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section p {
+      color: var(--text-muted);
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--purple);
+    }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* WHO IS IT FOR */
+    .levels {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .level {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .level-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple-light);
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+      border-radius: 8px;
+      padding: 4px 10px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .level-content h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .level-content p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* LANGUAGES */
+    .lang-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .lang-tag {
+      font-size: 13px;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    .lang-tag.highlight {
+      color: var(--purple-light);
+      border-color: rgba(124, 58, 237, 0.3);
+      background: rgba(124, 58, 237, 0.08);
+    }
+
+    /* CTA BOTTOM */
+    .cta-bottom {
+      text-align: center;
+      padding: 80px 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-bottom h2 {
+      font-size: clamp(24px, 4vw, 40px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .cta-bottom p {
+      color: var(--text-muted);
+      font-size: 17px;
+      margin-bottom: 40px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer .logo {
+      font-size: 16px;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    footer a:hover {
+      color: var(--purple-light);
+    }
+
+    /* SUCCESS MESSAGE */
+    .success-msg {
+      display: none;
+      font-size: 14px;
+      color: #34D399;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">melo<span>dora</span></div>
+    <div class="nav-tag">Coming Soon</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">Early Access</div>
+    <h1>The world of music<br/>becomes <em>personal</em></h1>
+    <p class="subtitle">
+      An AI co-pilot for music creation — built for every culture,
+      every language, and every level of musician on earth.
+    </p>
+
+    <div class="form-wrapper">
+      <input
+        type="email"
+        id="email-input"
+        placeholder="Enter your email"
+        autocomplete="email"
+      />
+      <button class="btn" onclick="handleSignup()">Get Early Access</button>
+    </div>
+    <p class="form-note">No spam. Just updates when we launch.</p>
+    <p class="success-msg" id="success-msg">
+      You're on the list. We'll be in touch.
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHAT IS MELODORA -->
+  <section class="section">
+    <p class="section-label">What is Melodora</p>
+    <h2>Music creation that understands your culture</h2>
+    <p>
+      Every AI music tool on the market was built for Western pop.
+      They fail at Persian Dastgah, Arabic Maqam, Turkish Makam,
+      and hundreds of other living musical traditions.
+    </p>
+    <p>
+      Melodora is different. It understands the musical language
+      you grew up with — and helps you create from inside it,
+      not around it.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🎵</div>
+        <h3>Cultural Depth</h3>
+        <p>Persian, Arabic, Turkish, Indian, and more — built in from the start, not bolted on.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧬</div>
+        <h3>Song DNA Analysis</h3>
+        <p>Upload any reference track and Melodora extracts its complete musical structure.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✍️</div>
+        <h3>Lyric Intelligence</h3>
+        <p>Lyrics that actually sound right when sung — syllable-perfect, culturally authentic.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎛️</div>
+        <h3>Production Ready</h3>
+        <p>From idea to complete Suno-ready package in one session. No guesswork.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHO IS IT FOR -->
+  <section class="section">
+    <p class="section-label">Who is it for</p>
+    <h2>Every musician. Every level.</h2>
+
+    <div class="levels">
+      <div class="level">
+        <div class="level-num">01</div>
+        <div class="level-content">
+          <h3>The Absolute Beginner</h3>
+          <p>Never touched an instrument. Has a feeling. Melodora does the rest.</p>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-num">02</div>
+        <div class="level-content">
+          <h3>The Casual Creator</h3>
+          <p>Has a melody or a lyric idea. Melodora fills in the gaps and makes it real.</p>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-num">03</div>
+        <div class="level-content">
+          <h3>The Serious Hobbyist</h3>
+          <p>Understands music theory. Wants a creative partner who keeps up.</p>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-num">04</div>
+        <div class="level-content">
+          <h3>The Professional Artist</h3>
+          <p>Knows exactly what they want. Melodora executes with precision.</p>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-num">05</div>
+        <div class="level-content">
+          <h3>The Master</h3>
+          <p>Pushing the boundaries of their tradition. Melodora understands deeply enough to keep up.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LANGUAGES -->
+  <section class="section">
+    <p class="section-label">Languages and Traditions</p>
+    <h2>Built for the music the world actually makes</h2>
+    <p>
+      Four billion people make music in traditions that current AI ignores.
+      Melodora is being built for all of them — starting here.
+    </p>
+
+    <div class="lang-grid">
+      <span class="lang-tag highlight">Persian — فارسی</span>
+      <span class="lang-tag highlight">Arabic — العربية</span>
+      <span class="lang-tag highlight">Turkish — Türkçe</span>
+      <span class="lang-tag highlight">Hindi — हिन्दी</span>
+      <span class="lang-tag">English</span>
+      <span class="lang-tag">French</span>
+      <span class="lang-tag">Spanish</span>
+      <span class="lang-tag">Russian</span>
+      <span class="lang-tag">Portuguese</span>
+      <span class="lang-tag">Swahili</span>
+      <span class="lang-tag">+ Every language on earth</span>
+    </div>
+  </section>
+
+  <!-- CTA BOTTOM -->
+  <section class="cta-bottom">
+    <h2>Be the first to create with Melodora</h2>
+    <p>Early access is limited. Join the list and we'll reach out personally.</p>
+
+    <div class="form-wrapper" style="justify-content:center;">
+      <input
+        type="email"
+        id="email-input-2"
+        placeholder="Enter your email"
+        autocomplete="email"
+      />
+      <button class="btn" onclick="handleSignup2()">Get Early Access</button>
+    </div>
+    <p class="form-note">Built in Toronto. Made for the world.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo">melo<span>dora</span></div>
+    <p>© 2026 Melodora. Toronto, Canada.</p>
+    <a href="mailto:nima@melodora.ca">nima@melodora.ca</a>
+  </footer>
+
+  <script>
+    function handleSignup() {
+      const email = document.getElementById('email-input').value;
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      document.getElementById('success-msg').style.display = 'block';
+      document.getElementById('email-input').value = '';
+    }
+
+    function handleSignup2() {
+      const email = document.getElementById('email-input-2').value;
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      alert('You are on the list. We will be in touch.');
+      document.getElementById('email-input-2').value = '';
+    }
+  </script>
+
+</body>
+</html>
